@@ -11,11 +11,11 @@ class ChessBoardTest(unittest.TestCase):
 
         self.chess_board = ChessBoard()
 
-    def test_has_max_board_width_of_7(self):
-        assert self.chess_board.MAX_BOARD_HEIGHT == 7
+    def test_has_max_board_width_of_8(self):
+        assert self.chess_board.MAX_BOARD_HEIGHT == 8
 
-    def test_has_max_board_height_of_7(self):
-        assert self.chess_board.MAX_BOARD_WIDTH == 7
+    def test_has_max_board_height_of_8(self):
+        assert self.chess_board.MAX_BOARD_WIDTH == 8
 
     def test_lower_left_corner_is_valid_position(self):
         is_valid = self.chess_board.is_legal_board_position(0, 0)
