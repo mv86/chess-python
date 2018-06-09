@@ -1,4 +1,7 @@
-class Pawn:
+from game_piece import GamePiece
+
+
+class Pawn(GamePiece):
     def __init__(self, piece_color):
         self._piece_color = piece_color
         self._chess_board = None
@@ -40,7 +43,5 @@ class Pawn:
     def move(self, movement_type, new_x, new_y):
         raise NotImplementedError()
 
-    def __unicode__(self):
-        return 'Current X: {}\nCurrent Y: {}\nPiece Color: {}'.format(
-            self.x_coordinate, self.y_coordinate, self.piece_color
-        )
+    def capture(self):
+        pass
