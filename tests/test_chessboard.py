@@ -31,7 +31,7 @@ class ChessBoardTest(unittest.TestCase):
 
     def test_position_out_of_bounds_north_is_invalid(self):
         is_valid = self.chess_board.is_legal_board_position(5, 9)
-        assert is_valid == True
+        assert is_valid == False
 
     def test_that_avoids_duplicate_positioning(self):
         first_pawn = Pawn(PieceColor.BLACK)
