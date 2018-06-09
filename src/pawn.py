@@ -8,10 +8,11 @@ class Pawn(GamePiece):
         self.x_coordinate = None
         self.y_coordinate = None
 
-    def move(self, new_x_coord, new_y_coord, board):
-        if self._valid_move(new_x_coord, new_y_coord, board):
-            self.x_coordinate = new_x_coord
-            self.y_coordinate = new_y_coord
+    def move(self, new_x_coord, new_y_coord, chess_board):
+        if self._valid_move(new_x_coord, new_y_coord, chess_board.board):
+            chess_board.place(self, new_x_coord, new_y_coord)
+            # self.x_coordinate = new_x_coord
+            # self.y_coordinate = new_y_coord
 
     def capture(self):
         pass

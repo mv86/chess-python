@@ -60,3 +60,20 @@ class ChessBoardTest(unittest.TestCase):
             else:
                 assert pawn.x_coordinate == -1
                 assert pawn.y_coordinate == -1
+
+    def test_piece_moved_on_board(self):
+        pawn = Pawn(color='black')
+        self.chess_board.add(pawn, 6, 6)
+        pawn.move(6, 5, self.chess_board)
+
+        assert self.chess_board.board[6][6] == None
+        assert self.chess_board.board[6][5] == pawn
+        assert pawn.x_coordinate == 6
+        assert pawn.y_coordinate == 5
+
+        pawn.move(6, 4, self.chess_board)
+
+        assert self.chess_board.board[6][5] == None
+        assert self.chess_board.board[6][5] == pawn
+        assert pawn.x_coordinate == 6
+        assert pawn.y_coordinate == 4
