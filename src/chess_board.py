@@ -1,12 +1,38 @@
+from collections import defaultdict
+
+from src.piece_color import PieceColor
+
+
 class ChessBoard:
     MAX_BOARD_WIDTH = 8
     MAX_BOARD_HEIGHT = 8
+    MAX_PIECES = {
+        'Pawn': 8,
+        'Knight': 2,
+        'Bishop': 2,
+        'Rook': 2,
+        'Queen': 1,
+        'King': 1
+    }
 
     def __init__(self):
         self.board = [[None] * 8 for _ in range(8)]
+        self.pieces = {
+            PieceColor.WHITE: defaultdict(int),
+            PieceColor.BLACK: defaultdict(int)
+        }
 
-    def add(self, pawn, x_coordinate, y_coordinate, piece_color):
-        raise NotImplementedError()
+    def add(self, piece, x_coordinate, y_coordinate, piece_color):
+        """Add piece to board at given coordinates. Modify piece coordinates."""
+        if (self.is_legal_board_position(x_coordinate, y_coordinate)
+                and self.pieces[piece_color][piece.type] < self.MAX_PIECES[piece.type]):
+            self.board[x_coordinate][y_coordinate] = piece
+            self.pieces[piece_color][piece.type] += 1
+            piece.x_coordinate = x_coordinate
+            piece.y_coordinate = y_coordinate
+        else:
+            piece.x_coordinate = -1
+            piece.y_coordinate = -1
 
     def is_legal_board_position(self, x_coordinate, y_coordinate):
         """Check passed coordinates are valid. Return bool."""

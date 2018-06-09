@@ -23,5 +23,5 @@ class GamePiece(ABC):
         pass
 
     @abstractmethod
-    def attack(self):
+    def capture(self):
         pass

@@ -1,8 +1,9 @@
-from game_piece import GamePiece
+from src.game_piece import GamePiece
 
 
 class Pawn(GamePiece):
     def __init__(self, piece_color):
+        super().__init__()
         self._piece_color = piece_color
         self._chess_board = None
         self._x_coordinate = None
