@@ -6,7 +6,7 @@ class GamePiece(ABC):
     """Base class for game pieces.
        Two required methods:
             move()
-            attack()
+            capture()
     """
     def __init__(self):
         self.type = self.__class__.__name__
@@ -16,7 +16,7 @@ class GamePiece(ABC):
 
     def __str__(self):
         return (f'{self.color.title()} {self.type}: '
-                f'x_pos = {self.x_coordinate}, y_pos = {self.y_coordinate}')
+                f'x_coord = {self.x_coordinate}, y_coord = {self.y_coordinate}')
 
     @abstractmethod
     def move(self):
