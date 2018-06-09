@@ -1,0 +1,5 @@
+*.py[cod]
+Pipfile*
+INSTRUCTIONS.md
+notes.txt
+scratchpad.py
