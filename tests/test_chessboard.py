@@ -34,8 +34,8 @@ class ChessBoardTest(unittest.TestCase):
         assert is_valid == False
 
     def test_that_avoids_duplicate_positioning(self):
-        first_pawn = Pawn(PieceColor.BLACK)
-        second_pawn = Pawn(PieceColor.BLACK)
+        first_pawn = Pawn(color='black')
+        second_pawn = Pawn(color='black')
         self.chess_board.add(first_pawn, 6, 3)
         self.chess_board.add(second_pawn, 6, 3)
 
@@ -46,7 +46,7 @@ class ChessBoardTest(unittest.TestCase):
 
     def test_limits_the_number_of_pawns(self):
         for count in range(10):
-            pawn = Pawn(PieceColor.BLACK)
+            pawn = Pawn(color='black')
             row = count / self.chess_board.MAX_BOARD_WIDTH
             self.chess_board.add(
                 pawn,

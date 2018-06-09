@@ -16,7 +16,7 @@ class GamePiece(ABC):
 
     def __str__(self):
         return (f'{self.color.title()} {self.type}: '
-                f'x_pos = {self.x_position}, y_pos = {self.y_position}')
+                f'x_pos = {self.x_coordinate}, y_pos = {self.y_coordinate}')
 
     @abstractmethod
     def move(self):

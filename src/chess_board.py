@@ -18,8 +18,8 @@ class ChessBoard:
     def __init__(self):
         self.board = [[None] * 8 for _ in range(8)]
         self.pieces = {
-            PieceColor.WHITE: defaultdict(int),
-            PieceColor.BLACK: defaultdict(int)
+            'white': defaultdict(int),
+            'black': defaultdict(int)
         }
 
     def add(self, piece, x_coordinate, y_coordinate):
@@ -46,4 +46,4 @@ class ChessBoard:
 
     def max_qunatity_reached(self, piece):
         """Check quantity of passed piece on board. Return bool."""
-        return self.pieces[piece.color][piece.type] < self.MAX_PIECES[piece.type]
+        return self.pieces[piece.color][piece.type] >= self.MAX_PIECES[piece.type]
