@@ -22,12 +22,12 @@ class ChessBoard:
             PieceColor.BLACK: defaultdict(int)
         }
 
-    def add(self, piece, x_coordinate, y_coordinate, piece_color):
+    def add(self, piece, x_coordinate, y_coordinate):
         """Add piece to board at given coordinates. Modify piece coordinates."""
         if (self.is_legal_board_position(x_coordinate, y_coordinate)
-                and self.pieces[piece_color][piece.type] < self.MAX_PIECES[piece.type]):
+                and not self.max_qunatity_reached(piece)):
             self.board[x_coordinate][y_coordinate] = piece
-            self.pieces[piece_color][piece.type] += 1
+            self.pieces[piece.color][piece.type] += 1
             piece.x_coordinate = x_coordinate
             piece.y_coordinate = y_coordinate
         else:
@@ -42,3 +42,8 @@ class ChessBoard:
             return False
         except IndexError:  # Not on ChessBoard
             return False
+
+
+    def max_qunatity_reached(self, piece):
+        """Check quantity of passed piece on board. Return bool."""
+        return self.pieces[piece.color][piece.type] < self.MAX_PIECES[piece.type]

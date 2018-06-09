@@ -2,9 +2,9 @@ from src.game_piece import GamePiece
 
 
 class Pawn(GamePiece):
-    def __init__(self, piece_color):
+    def __init__(self, color):
         super().__init__()
-        self._piece_color = piece_color
+        self._color = color
         self._chess_board = None
         self._x_coordinate = None
         self._y_coordinate = None
@@ -34,12 +34,12 @@ class Pawn(GamePiece):
         self._y_coordinate = value
 
     @property
-    def piece_color(self):
-        return self._piece_color
+    def color(self):
+        return self._color
 
-    @piece_color.setter
-    def piece_color(self, value):
-        self.piece_color = value
+    @color.setter
+    def color(self, value):
+        self.color = value
 
     def move(self, movement_type, new_x, new_y):
         raise NotImplementedError()

@@ -36,8 +36,8 @@ class ChessBoardTest(unittest.TestCase):
     def test_that_avoids_duplicate_positioning(self):
         first_pawn = Pawn(PieceColor.BLACK)
         second_pawn = Pawn(PieceColor.BLACK)
-        self.chess_board.add(first_pawn, 6, 3, PieceColor.BLACK)
-        self.chess_board.add(second_pawn, 6, 3, PieceColor.BLACK)
+        self.chess_board.add(first_pawn, 6, 3)
+        self.chess_board.add(second_pawn, 6, 3)
 
         assert first_pawn.x_coordinate == 6
         assert first_pawn.y_coordinate == 3
@@ -51,8 +51,7 @@ class ChessBoardTest(unittest.TestCase):
             self.chess_board.add(
                 pawn,
                 count,
-                count % self.chess_board.MAX_BOARD_WIDTH,
-                PieceColor.BLACK,
+                count % self.chess_board.MAX_BOARD_WIDTH
             )
 
             if row < 1:
