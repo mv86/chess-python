@@ -25,12 +25,13 @@ class ChessBoard():
         }
 
     def add(self, piece, coords):
-        """Add piece to board at given coordinates. Modify piece coordinates."""
+        """Add piece to board at given coordinates. Update piece to have same coordinates."""
         if self._legal_board_position(coords) and not self._max_quantity(piece):
             self.pieces[piece.color][piece.type] += 1
-            self._place(piece, coords)
+            self._move(piece, coords)
 
     def move(self, from_coords, to_coords):
+        """TODO"""
         if not self._coords_on_board(from_coords):
             raise NotOnBoardError(from_coords, 'From coordinates not valid board coordinates')
 
@@ -47,10 +48,17 @@ class ChessBoard():
         if self._pieces_blocking_move(piece, to_coords):
             raise InvalidMoveError(from_coords, to_coords, 'Piece blocking this move')
 
-        # if not self._valid_piece_move(piece, to_coords):
-        #     raise InvalidMoveError(from_coords, to_coords, 'Invalid move for this piece')
+        if not self._valid_piece_move(piece, to_coords):
+            raise InvalidMoveError(from_coords, to_coords, 'Invalid move for this piece')
         
-        self._place(piece, to_coords)
+        self._move(piece, to_coords)
+
+    def _move(self, piece, coords):
+        """Clear current postion and place piece on new coordinates."""
+        self._clear_current_position(piece)
+        self.board[coords.x][coords.y] = piece
+        piece.x_coord = coords.x
+        piece.y_coord = coords.y
 
     def _coords_on_board(self, coords):
         if (coords.x not in range(self.MAX_BOARD_WIDTH) 
@@ -75,31 +83,24 @@ class ChessBoard():
         elif direction == 'diagonal':
             for num in range(piece.x_coord + 1, coords.x):
                 if self.board[num][num] is not None:
-                    return True            
+                    return True          
         return False
 
-    def _move_direction(self, piece, coords):
+    @staticmethod
+    def _move_direction(piece, coords):
         if piece.x_coord != coords.x and piece.y_coord != coords.y:
             direction = 'diagonal'
         elif piece.x_coord != coords.x:
             direction = 'horizontal'
-        elif piece.y_coord != coords.y:
+        else:  # piece.y_coord != coords.y
             direction = 'vertical'
-        else:  # Shouldn't reach here
-            direction = ''
         return direction
 
     def _valid_piece_move(self, piece, coords):
-        if self.board[coords.x][coords.y] is None:
+        if self.board[coords.x][coords.y] is None:  # Empty square so move
             return piece.valid_move(coords)
+        # Occupied square so capture
         return piece.valid_capture(coords)
-
-    def _place(self, piece, coords):
-        """Clear current postion and place piece on new coordinates."""
-        self._clear_current_position(piece)
-        self.board[coords.x][coords.y] = piece
-        piece.x_coord = coords.x
-        piece.y_coord = coords.y
 
     def _legal_board_position(self, coords):
         """Check passed coordinates are valid. Return bool."""

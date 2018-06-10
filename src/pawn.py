@@ -8,14 +8,19 @@ class Pawn(GamePiece):
 
     def valid_move(self, coords):
         # TODO Add first move functionality for two spaces
-        if self.color == 'white':
-            valid_y_coord = self.y_coord + 1
-        elif self.color == 'black':
-            valid_y_coord = self.y_coord - 1
-
-        if coords.x == self.x_coord and coords.y == valid_y_coord:
+        if coords.x == self.x_coord and coords.y == self._valid_y_coord():
             return True
         return False
 
     def valid_capture(self, coords):
-        pass
+        if ((coords.x == self.x_coord + 1 or coords.x == self.x_coord - 1)
+                and coords.y == self._valid_y_coord()):
+            return True
+        return False
+
+    def _valid_y_coord(self):
+        if self.color == 'white':
+            valid_y_coord = self.y_coord + 1
+        elif self.color == 'black':
+            valid_y_coord = self.y_coord - 1
+        return valid_y_coord
