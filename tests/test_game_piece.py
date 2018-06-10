@@ -10,13 +10,13 @@ class TestGamePiece(unittest.TestCase):
         self.assertRaises(TypeError, GamePiece)
 
     def test_that_child_class_inherits_properties(self):
-        self.pawn = Pawn(color='black')
+        pawn = Pawn(color='black')
         test_repr = "Pawn('black')"
         test_str = 'Black Pawn: x_coord = None, y_coord = None'
 
-        assert self.pawn.type == 'Pawn'
-        assert repr(self.pawn) == test_repr
-        assert str(self.pawn) == test_str
+        assert pawn.type == 'Pawn'
+        assert repr(pawn) == test_repr
+        assert str(pawn) == test_str
 
     def test_that_abstract_methods_require_implementing(self):
         class TestPiece(GamePiece):

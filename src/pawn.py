@@ -5,8 +5,6 @@ class Pawn(GamePiece):
     def __init__(self, *, color):
         super().__init__()
         self.color = color
-        self.x_coordinate = None
-        self.y_coordinate = None
 
     def move(self, new_x_coord, new_y_coord, chess_board):
         if self._valid_move(new_x_coord, new_y_coord, chess_board.board):

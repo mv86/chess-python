@@ -10,6 +10,9 @@ class GamePiece(ABC):
     """
     def __init__(self):
         self.type = self.__class__.__name__
+        self.color = None
+        self.x_coordinate = None
+        self.y_coordinate = None
 
     def __repr__(self):
         return f'{self.type}({self.color!r})'

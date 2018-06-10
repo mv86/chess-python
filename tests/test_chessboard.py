@@ -74,6 +74,6 @@ class ChessBoardTest(unittest.TestCase):
         pawn.move(6, 4, self.chess_board)
 
         assert self.chess_board.board[6][5] == None
-        assert self.chess_board.board[6][5] == pawn
+        assert self.chess_board.board[6][4] == pawn
         assert pawn.x_coordinate == 6
         assert pawn.y_coordinate == 4
