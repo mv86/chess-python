@@ -43,7 +43,7 @@ class ChessBoard():
 
         if from_coords == to_coords:
             raise InvalidMoveError(from_coords, to_coords, 'Move to same square invalid')
-            
+
         if self._pieces_blocking_move(piece, to_coords):
             raise InvalidMoveError(from_coords, to_coords, 'Piece blocking this move')
 
@@ -65,25 +65,25 @@ class ChessBoard():
         direction = self._move_direction(piece, coords)
 
         if direction == 'vertical':
-            for num in range(piece.y_coordinate + 1, coords.y):
-                if self.board[piece.x_coordinate][num] is not None:
+            for num in range(piece.y_coord + 1, coords.y):
+                if self.board[piece.x_coord][num] is not None:
                     return True
         elif direction == 'horizontal':
-            for num in range(piece.x_coordinate + 1, coords.x):
-                if self.board[num][piece.y_coordinate] is not None:
+            for num in range(piece.x_coord + 1, coords.x):
+                if self.board[num][piece.y_coord] is not None:
                     return True
         elif direction == 'diagonal':
-            for num in range(piece.x_coordinate + 1, coords.x):
+            for num in range(piece.x_coord + 1, coords.x):
                 if self.board[num][num] is not None:
                     return True            
         return False
 
     def _move_direction(self, piece, coords):
-        if piece.x_coordinate != coords.x and piece.y_coordinate != coords.y:
+        if piece.x_coord != coords.x and piece.y_coord != coords.y:
             direction = 'diagonal'
-        elif piece.x_coordinate != coords.x:
+        elif piece.x_coord != coords.x:
             direction = 'horizontal'
-        elif piece.y_coordinate != coords.y:
+        elif piece.y_coord != coords.y:
             direction = 'vertical'
         else:  # Shouldn't reach here
             direction = ''
@@ -98,8 +98,8 @@ class ChessBoard():
         """Clear current postion and place piece on new coordinates."""
         self._clear_current_position(piece)
         self.board[coords.x][coords.y] = piece
-        piece.x_coordinate = coords.x
-        piece.y_coordinate = coords.y
+        piece.x_coord = coords.x
+        piece.y_coord = coords.y
 
     def _legal_board_position(self, coords):
         """Check passed coordinates are valid. Return bool."""
@@ -116,6 +116,6 @@ class ChessBoard():
 
     def _clear_current_position(self, piece):
         try:
-            self.board[piece.x_coordinate][piece.y_coordinate] = None
+            self.board[piece.x_coord][piece.y_coord] = None
         except TypeError:  # Piece not yet on game board
             pass

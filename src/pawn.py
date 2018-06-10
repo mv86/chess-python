@@ -7,14 +7,13 @@ class Pawn(GamePiece):
         self.color = color
 
     def valid_move(self, coords):
-        """Check if move is valid. Return bool."""
         # TODO Add first move functionality for two spaces
         if self.color == 'white':
-            valid_y_coord = self.y_coordinate + 1
+            valid_y_coord = self.y_coord + 1
         elif self.color == 'black':
-            valid_y_coord = self.y_coordinate - 1
+            valid_y_coord = self.y_coord - 1
 
-        if coords.x == self.x_coordinate and coords.y == valid_y_coord:
+        if coords.x == self.x_coord and coords.y == valid_y_coord:
             return True
         return False
 

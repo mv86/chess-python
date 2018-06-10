@@ -46,10 +46,10 @@ class ChessBoardTest(unittest.TestCase):
         self.chess_board.add(first_pawn, coords)
         self.chess_board.add(second_pawn, coords)
 
-        assert first_pawn.x_coordinate == 6
-        assert first_pawn.y_coordinate == 3
-        assert not second_pawn.x_coordinate
-        assert not second_pawn.y_coordinate
+        assert first_pawn.x_coord == 6
+        assert first_pawn.y_coord == 3
+        assert not second_pawn.x_coord
+        assert not second_pawn.y_coord
 
     def test_limits_the_number_of_pawns(self):
         for count in range(10):
@@ -63,11 +63,11 @@ class ChessBoardTest(unittest.TestCase):
             )
 
             if row < 1:
-                assert pawn.x_coordinate == count
-                assert pawn.y_coordinate == count % self.chess_board.MAX_BOARD_WIDTH
+                assert pawn.x_coord == count
+                assert pawn.y_coord == count % self.chess_board.MAX_BOARD_WIDTH
             else:
-                assert not pawn.x_coordinate
-                assert not pawn.y_coordinate
+                assert not pawn.x_coord
+                assert not pawn.y_coord
 
     # def test_piece_moved_on_board(self):
     #     pawn = Pawn(color='black')
@@ -76,15 +76,15 @@ class ChessBoardTest(unittest.TestCase):
 
     #     assert self.chess_board.board[6][6] is None
     #     assert self.chess_board.board[6][5] == pawn
-    #     assert pawn.x_coordinate == 6
-    #     assert pawn.y_coordinate == 5
+    #     assert pawn.x_coord == 6
+    #     assert pawn.y_coord == 5
 
     #     pawn.move(self.coords(x=6, y=4), self.chess_board)
 
     #     assert self.chess_board.board[6][5] is None
     #     assert self.chess_board.board[6][4] == pawn
-    #     assert pawn.x_coordinate == 6
-    #     assert pawn.y_coordinate == 4
+    #     assert pawn.x_coord == 6
+    #     assert pawn.y_coord == 4
 
     def test_invalid_from_coords_raises_exception(self):
         from_coords = self.coords(x=1, y=50)
