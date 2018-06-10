@@ -1,3 +1,4 @@
+from collections import namedtuple
 import unittest
 
 from src.chess_board import ChessBoard
@@ -10,6 +11,7 @@ class ChessBoardTest(unittest.TestCase):
         super().setUp()
 
         self.chess_board = ChessBoard()
+        self.coords = namedtuple('Coords', 'x y')
 
     def test_has_max_board_width_of_8(self):
         assert self.chess_board.MAX_BOARD_HEIGHT == 8
@@ -18,26 +20,26 @@ class ChessBoardTest(unittest.TestCase):
         assert self.chess_board.MAX_BOARD_WIDTH == 8
 
     def test_lower_left_corner_is_valid_position(self):
-        is_valid = self.chess_board.is_legal_board_position(0, 0)
-        assert is_valid == True
+        is_valid = self.chess_board.is_legal_board_position(self.coords(x=0, y=0))
+        assert is_valid
 
     def test_upper_right_corner_is_valid_position(self):
-        is_valid = self.chess_board.is_legal_board_position(7, 7)
-        assert is_valid == True
+        is_valid = self.chess_board.is_legal_board_position(self.coords(x=7, y=7))
+        assert is_valid
 
     def test_position_out_of_bounds_east_is_invalid(self):
-        is_valid = self.chess_board.is_legal_board_position(11, 5)
-        assert is_valid == False
+        is_valid = self.chess_board.is_legal_board_position(self.coords(x=11, y=5))
+        assert not is_valid
 
     def test_position_out_of_bounds_north_is_invalid(self):
-        is_valid = self.chess_board.is_legal_board_position(5, 9)
-        assert is_valid == False
+        is_valid = self.chess_board.is_legal_board_position(self.coords(x=5, y=9))
+        assert not is_valid
 
     def test_that_avoids_duplicate_positioning(self):
         first_pawn = Pawn(color='black')
         second_pawn = Pawn(color='black')
-        self.chess_board.add(first_pawn, 6, 3)
-        self.chess_board.add(second_pawn, 6, 3)
+        self.chess_board.add(first_pawn, self.coords(x=6, y=3))
+        self.chess_board.add(second_pawn, self.coords(x=6, y=3))
 
         assert first_pawn.x_coordinate == 6
         assert first_pawn.y_coordinate == 3
@@ -48,10 +50,11 @@ class ChessBoardTest(unittest.TestCase):
         for count in range(10):
             pawn = Pawn(color='black')
             row = count / self.chess_board.MAX_BOARD_WIDTH
+            x_coord = count
+            y_coord = count % self.chess_board.MAX_BOARD_WIDTH
             self.chess_board.add(
                 pawn,
-                count,
-                count % self.chess_board.MAX_BOARD_WIDTH
+                self.coords(x=x_coord, y=y_coord)
             )
 
             if row < 1:
@@ -63,17 +66,17 @@ class ChessBoardTest(unittest.TestCase):
 
     def test_piece_moved_on_board(self):
         pawn = Pawn(color='black')
-        self.chess_board.add(pawn, 6, 6)
-        pawn.move(6, 5, self.chess_board)
+        self.chess_board.add(pawn, self.coords(x=6, y=6))
+        pawn.move(self.coords(x=6, y=5), self.chess_board)
 
-        assert self.chess_board.board[6][6] == None
+        assert self.chess_board.board[6][6] is None
         assert self.chess_board.board[6][5] == pawn
         assert pawn.x_coordinate == 6
         assert pawn.y_coordinate == 5
 
-        pawn.move(6, 4, self.chess_board)
+        pawn.move(self.coords(x=6, y=4), self.chess_board)
 
-        assert self.chess_board.board[6][5] == None
+        assert self.chess_board.board[6][5] is None
         assert self.chess_board.board[6][4] == pawn
         assert pawn.x_coordinate == 6
         assert pawn.y_coordinate == 4

@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from src.piece_color import PieceColor
+# from src.piece_color import PieceColor
 
 
 class ChessBoard:
@@ -22,27 +22,27 @@ class ChessBoard:
             'black': defaultdict(int)
         }
 
-    def add(self, piece, x_coordinate, y_coordinate):
+    def add(self, piece, coords):
         """Add piece to board at given coordinates. Modify piece coordinates."""
-        if (self.is_legal_board_position(x_coordinate, y_coordinate)
+        if (self.is_legal_board_position(coords)
                 and not self.max_qunatity_reached(piece)):
             self.pieces[piece.color][piece.type] += 1
-            self.place(piece, x_coordinate, y_coordinate)
+            self.place(piece, coords)
         else:
             piece.x_coordinate = -1
             piece.y_coordinate = -1
 
-    def place(self, piece, x_coordinate, y_coordinate):
+    def place(self, piece, coords):
         """Clear current postion and place piece on new coordinates."""
         self._clear_current_position(piece)
-        self.board[x_coordinate][y_coordinate] = piece
-        piece.x_coordinate = x_coordinate
-        piece.y_coordinate = y_coordinate
+        self.board[coords.x][coords.y] = piece
+        piece.x_coordinate = coords.x
+        piece.y_coordinate = coords.y
 
-    def is_legal_board_position(self, x_coordinate, y_coordinate):
+    def is_legal_board_position(self, coords):
         """Check passed coordinates are valid. Return bool."""
         try:
-            if self.board[x_coordinate][y_coordinate] is None:
+            if self.board[coords.x][coords.y] is None:
                 return True
             return False
         except IndexError:  # Not on ChessBoard
