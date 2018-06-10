@@ -70,21 +70,50 @@ class ChessBoardTest(unittest.TestCase):
                 assert not pawn.x_coord
                 assert not pawn.y_coord
 
-    # def test_piece_moved_on_board(self):
-    #     self.chess_board.add(self.pawn, self.coords(x=6, y=6))
-    #     pawn.move(self.coords(x=6, y=5), self.chess_board)
+    def test_piece_moved_on_board(self):
+        self.chess_board.add(self.pawn, self.coords(x=6, y=6))
+        self.chess_board.move(self.coords(x=6, y=6), self.coords(x=6, y=5))
 
-    #     assert self.chess_board.board[6][6] is None
-    #     assert self.chess_board.board[6][5] == self.pawn
-    #     assert self.pawn.x_coord == 6
-    #     assert self.pawn.y_coord == 5
+        assert self.chess_board.board[6][6] is None
+        assert self.chess_board.board[6][5] == self.pawn
+        assert self.pawn.x_coord == 6
+        assert self.pawn.y_coord == 5
 
-    #     self.pawn.move(self.coords(x=6, y=4), self.chess_board)
+        self.chess_board.move(self.coords(x=6, y=5), self.coords(x=6, y=4))
 
-    #     assert self.chess_board.board[6][5] is None
-    #     assert self.chess_board.board[6][4] == self.pawn
-    #     assert self.pawn.x_coord == 6
-    #     assert self.pawn.y_coord == 4
+        assert self.chess_board.board[6][5] is None
+        assert self.chess_board.board[6][4] == self.pawn
+        assert self.pawn.x_coord == 6
+        assert self.pawn.y_coord == 4
+
+    def test_captured_piece_removed_from_board(self):
+        white_pawn1 = Pawn(color='white')       
+        white_pawn2 = Pawn(color='white')       
+        self.chess_board.add(self.pawn, self.coords(x=6, y=6))
+        self.chess_board.add(white_pawn1, self.coords(x=5, y=5))
+        self.chess_board.add(white_pawn2, self.coords(x=4, y=4))
+
+        assert white_pawn1.x_coord == 5
+        assert white_pawn1.y_coord == 5       
+        # Attack white_pawn1
+        self.chess_board.move(self.coords(x=6, y=6), self.coords(x=5, y=5))
+        assert self.chess_board.board[6][6] is None
+        assert self.chess_board.board[5][5] == self.pawn
+        assert self.pawn.x_coord == 5
+        assert self.pawn.y_coord == 5
+        assert not white_pawn1.x_coord
+        assert not white_pawn1.x_coord
+
+        assert white_pawn2.x_coord == 4
+        assert white_pawn2.y_coord == 4       
+        # Attack white_pawn2
+        self.chess_board.move(self.coords(x=5, y=5), self.coords(x=4, y=4))
+        assert self.chess_board.board[5][5] is None
+        assert self.chess_board.board[4][4] == self.pawn
+        assert self.pawn.x_coord == 4
+        assert self.pawn.y_coord == 4
+        assert not white_pawn2.x_coord
+        assert not white_pawn2.x_coord
 
     def test_invalid_from_coords_raises_exception(self):
         from_coords = self.coords(x=1, y=50)

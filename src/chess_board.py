@@ -28,7 +28,7 @@ class ChessBoard():
         """Add piece to board at given coordinates. Update piece to have same coordinates."""
         if self._legal_board_position(coords) and not self._max_quantity(piece):
             self.pieces[piece.color][piece.type] += 1
-            self._move(piece, coords)
+            self._place(piece, coords)
 
     def move(self, from_coords, to_coords):
         """TODO"""
@@ -51,11 +51,26 @@ class ChessBoard():
         if not self._valid_piece_move(piece, to_coords):
             raise InvalidMoveError(from_coords, to_coords, 'Invalid move for this piece')
         
+        # No exceptions raised, safe to move piece
         self._move(piece, to_coords)
 
     def _move(self, piece, coords):
         """Clear current postion and place piece on new coordinates."""
-        self._clear_current_position(piece)
+        # Empty piece current square
+        self.board[piece.x_coord][piece.y_coord] = None
+
+        # If move is capture, remove captured piece
+        board_postion = self.board[coords.x][coords.y]
+        if board_postion is not None:
+            captured_piece = board_postion
+            captured_piece.x_coord = None
+            captured_piece.y_coord = None
+            board_postion = None
+
+        # Place piece at new coordinates
+        self._place(piece, coords)
+
+    def _place(self, piece, coords):
         self.board[coords.x][coords.y] = piece
         piece.x_coord = coords.x
         piece.y_coord = coords.y
@@ -114,9 +129,3 @@ class ChessBoard():
     def _max_quantity(self, piece):
         """Check quantity of passed piece on board. Return bool."""
         return self.pieces[piece.color][piece.type] >= self.MAX_PIECES[piece.type]
-
-    def _clear_current_position(self, piece):
-        try:
-            self.board[piece.x_coord][piece.y_coord] = None
-        except TypeError:  # Piece not yet on game board
-            pass
