@@ -22,9 +22,9 @@ class GamePiece(ABC):
                 f'x_coord = {self.x_coordinate}, y_coord = {self.y_coordinate}')
 
     @abstractmethod
-    def move(self):
+    def valid_move(self):
         pass
 
     @abstractmethod
-    def capture(self):
+    def valid_capture(self):
         pass

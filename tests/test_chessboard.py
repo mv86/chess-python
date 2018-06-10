@@ -66,22 +66,22 @@ class ChessBoardTest(unittest.TestCase):
                 assert not pawn.x_coordinate
                 assert not pawn.y_coordinate
 
-    def test_piece_moved_on_board(self):
-        pawn = Pawn(color='black')
-        self.chess_board.add(pawn, self.coords(x=6, y=6))
-        pawn.move(self.coords(x=6, y=5), self.chess_board)
+    # def test_piece_moved_on_board(self):
+    #     pawn = Pawn(color='black')
+    #     self.chess_board.add(pawn, self.coords(x=6, y=6))
+    #     pawn.move(self.coords(x=6, y=5), self.chess_board)
 
-        assert self.chess_board.board[6][6] is None
-        assert self.chess_board.board[6][5] == pawn
-        assert pawn.x_coordinate == 6
-        assert pawn.y_coordinate == 5
+    #     assert self.chess_board.board[6][6] is None
+    #     assert self.chess_board.board[6][5] == pawn
+    #     assert pawn.x_coordinate == 6
+    #     assert pawn.y_coordinate == 5
 
-        pawn.move(self.coords(x=6, y=4), self.chess_board)
+    #     pawn.move(self.coords(x=6, y=4), self.chess_board)
 
-        assert self.chess_board.board[6][5] is None
-        assert self.chess_board.board[6][4] == pawn
-        assert pawn.x_coordinate == 6
-        assert pawn.y_coordinate == 4
+    #     assert self.chess_board.board[6][5] is None
+    #     assert self.chess_board.board[6][4] == pawn
+    #     assert pawn.x_coordinate == 6
+    #     assert pawn.y_coordinate == 4
 
 
     def test_invalid_from_coords_raises_exception(self):

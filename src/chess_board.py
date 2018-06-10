@@ -63,8 +63,8 @@ class ChessBoard():
 
     def _valid_piece_move(self, piece, coords):
         if self.board[coords.x][coords.y] is None:
-            return piece.valid_move()
-        return piece.valid_capture()
+            return piece.valid_move(coords)
+        return piece.valid_capture(coords)
 
     def _place(self, piece, coords):
         """Clear current postion and place piece on new coordinates."""
