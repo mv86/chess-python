@@ -15,7 +15,7 @@ class Pawn(GamePiece):
             valid_y_coord = self.y_coordinate - 1
 
         if coords.x == self.x_coordinate and coords.y == valid_y_coord:
-                return True
+            return True
         return False
 
     def valid_capture(self, coords):

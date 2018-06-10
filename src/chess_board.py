@@ -41,8 +41,11 @@ class ChessBoard():
         if not piece:
             raise PieceNotFoundError(from_coords, 'No piece found at from coordinates')
 
-        # if self._pieces_blocking_move(piece, to_coords):
-        #     raise InvalidMoveError(from_coords, to_coords, 'Piece blocking this move')
+        if from_coords == to_coords:
+            raise InvalidMoveError(from_coords, to_coords, 'Move to same square invalid')
+            
+        if self._pieces_blocking_move(piece, to_coords):
+            raise InvalidMoveError(from_coords, to_coords, 'Piece blocking this move')
 
         # if not self._valid_piece_move(piece, to_coords):
         #     raise InvalidMoveError(from_coords, to_coords, 'Invalid move for this piece')
@@ -56,10 +59,35 @@ class ChessBoard():
         return True
 
     def _pieces_blocking_move(self, piece, coords):
-        if piece.type == 'Knight': 
-            return False  # Knight can jump over pieces
-        # TODO Implement
+        if piece.type == 'Knight': # Knight can jump over pieces
+            return False
+
+        direction = self._move_direction(piece, coords)
+
+        if direction == 'vertical':
+            for num in range(piece.y_coordinate + 1, coords.y):
+                if self.board[piece.x_coordinate][num] is not None:
+                    return True
+        elif direction == 'horizontal':
+            for num in range(piece.x_coordinate + 1, coords.x):
+                if self.board[num][piece.y_coordinate] is not None:
+                    return True
+        elif direction == 'diagonal':
+            for num in range(piece.x_coordinate + 1, coords.x):
+                if self.board[num][num] is not None:
+                    return True            
         return False
+
+    def _move_direction(self, piece, coords):
+        if piece.x_coordinate != coords.x and piece.y_coordinate != coords.y:
+            direction = 'diagonal'
+        elif piece.x_coordinate != coords.x:
+            direction = 'horizontal'
+        elif piece.y_coordinate != coords.y:
+            direction = 'vertical'
+        else:  # Shouldn't reach here
+            direction = ''
+        return direction
 
     def _valid_piece_move(self, piece, coords):
         if self.board[coords.x][coords.y] is None:
