@@ -21,19 +21,19 @@ class ChessBoardTest(unittest.TestCase):
 
     def test_lower_left_corner_is_valid_position(self):
         coords = self.coords(x=0, y=0)
-        assert self.chess_board.legal_board_position(coords)
+        assert self.chess_board._legal_board_position(coords)
 
     def test_upper_right_corner_is_valid_position(self):
         coords = self.coords(x=7, y=7)
-        assert self.chess_board.legal_board_position(coords)
+        assert self.chess_board._legal_board_position(coords)
 
     def test_position_out_of_bounds_east_is_invalid(self):
         coords = self.coords(x=11, y=5)
-        assert not self.chess_board.legal_board_position(coords)
+        assert not self.chess_board._legal_board_position(coords)
 
     def test_position_out_of_bounds_north_is_invalid(self):
         coords = self.coords(x=5, y=9)
-        assert not self.chess_board.legal_board_position(coords)
+        assert not self.chess_board._legal_board_position(coords)
 
     def test_that_avoids_duplicate_positioning(self):
         first_pawn = Pawn(color='black')

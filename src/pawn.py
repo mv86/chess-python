@@ -8,7 +8,7 @@ class Pawn(GamePiece):
 
     def move(self, new_coords, chess_board):
         if self._valid_move(new_coords, chess_board.board):
-            chess_board.place(self, new_coords)
+            chess_board._place(self, new_coords)
             # self.x_coordinate = new_x_coord
             # self.y_coordinate = new_y_coord
 
