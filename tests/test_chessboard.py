@@ -3,7 +3,8 @@ import unittest
 
 from src.chess_board import ChessBoard
 from src.pawn import Pawn
-from src.piece_color import PieceColor
+from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
+# from src.piece_color import PieceColor
 
 
 class ChessBoardTest(unittest.TestCase):
@@ -81,3 +82,40 @@ class ChessBoardTest(unittest.TestCase):
         assert self.chess_board.board[6][4] == pawn
         assert pawn.x_coordinate == 6
         assert pawn.y_coordinate == 4
+
+
+    def test_invalid_from_coords_raises_exception(self):
+        move = self.chess_board.move
+        from_coords = self.coords(x=1, y=50)
+        to_coords = self.coords(x=1, y=6)
+        self.assertRaises(NotOnBoardError, move, from_coords, to_coords)
+
+    def test_invalid_to_coords_raises_exception(self):
+        move = self.chess_board.move
+        from_coords = self.coords(x=1, y=6)
+        to_coords = self.coords(x=50, y=7)
+        self.assertRaises(NotOnBoardError, move, from_coords, to_coords)
+
+    def test_empty_from_coords_raises_exception(self):
+        move = self.chess_board.move
+        from_coords = self.coords(x=1, y=6)
+        to_coords = self.coords(x=1, y=5)
+        self.assertRaises(PieceNotFoundError, move, from_coords, to_coords)
+
+    # def test_piece_blocking_move_raises_exception(self):
+    #     move = self.chess_board.move
+    #     from_coords = self.coords(x=1, y=6)
+    #     to_coords = self.coords(x=50, y=7)
+    #     self.assertRaises(NotOnBoardError, move, from_coords, to_coords)
+
+    # def test_invalid_move_for_piece_raises_exception(self):
+    #     move = self.chess_board.move
+    #     from_coords = self.coords(x=1, y=6)
+    #     to_coords = self.coords(x=1, y=5)
+    #     self.assertRaises(PieceNotFoundError, move, from_coords, to_coords)
+
+    # def test_invalid_attack_for_piece_raises_exception(self):
+    #     move = self.chess_board.move
+    #     from_coords = self.coords(x=1, y=6)
+    #     to_coords = self.coords(x=1, y=5)
+    #     self.assertRaises(PieceNotFoundError, move, from_coords, to_coords)

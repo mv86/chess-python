@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
+
 # from src.piece_color import PieceColor
 
 
@@ -28,31 +30,24 @@ class ChessBoard():
             self.pieces[piece.color][piece.type] += 1
             self._place(piece, coords)
 
+    def move(self, from_coords, to_coords):
+        if not self._coords_on_board(from_coords):
+            raise NotOnBoardError(from_coords, 'From coordinates not valid board coordinates')
 
-    # def move(self, from_coords, to_coords):
-    #     if not self._coords_on_board(from_coords):
-    #         # TODO raise NotOnBoardError('From coordinates not valid board coordinates')
-    #         return False
+        if not self._coords_on_board(to_coords):
+            raise NotOnBoardError(to_coords, 'To coordinates not valid board coordinates')
+
+        piece = self.board[from_coords.x][from_coords.y]
+        if not piece:
+            raise PieceNotFoundError(from_coords, 'No piece found at from coordinates')
+
+        # if self._pieces_blocking_move(piece, to_coords):
+        #     raise InvalidMoveError(from_coords, to_coords, 'Piece blocking this move')
+
+        # if not self._valid_piece_move(piece, to_coords):
+        #     raise InvalidMoveError(from_coords, to_coords, 'Invalid move for this piece')
         
-    #     if not self._coords_on_board(from_coords):
-    #         # TODO raise NotOnBoardError('To coordinates not valid board coordinates')
-    #         return False
-
-    #     piece = self.board[from_coords.x][from_coords.y]
-    #     if not piece:
-    #         # TODO raise PieceNotFoundError('No piece found at from coordinates')
-    #         return False
-
-    #     if self._pieces_blocking_move(piece, to_coords):
-    #         #TODO raise InvalidMoveError('Piece blocking this move')
-    #         return False
-
-    #     if not self._valid_piece_move(piece, to_coords):
-    #         #TODO raise InvalidMoveError('Invalid move for this piece')
-    #         return False
-        
-    #     self._place(piece, to_coords)
-    #     return True
+        self._place(piece, to_coords)
 
     def _coords_on_board(self, coords):
         if (coords.x not in range(self.MAX_BOARD_WIDTH) 
@@ -65,7 +60,6 @@ class ChessBoard():
             return False  # Knight can jump over pieces
         # TODO Implement
         return False
-
 
     def _valid_piece_move(self, piece, coords):
         if self.board[coords.x][coords.y] is None:

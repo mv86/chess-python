@@ -32,3 +32,13 @@
 **Changed all function calls to expect a Coords(x, y) namedtuple rather than seperate coordinates.**
 
 *Reason:* Felt coords represented one place on the board and should be passed around together. Namedtuple enforces readability: coords.x == 1 better than coords[0] == 1.
+
+
+**Piece coordinates now revert back to None (replacing -1) if they are taken or not placed on the board because of an error.**
+
+*Reason:* Didn't add any functionality and helps keep the code cleaner.
+
+
+**Created three game exceptions: NotOnBoardError, PieceNotFoundError, InvalidMoveError**
+
+*Reason:* Express the infomation I want to return from the GameBoard interface if any exceptions raised.
