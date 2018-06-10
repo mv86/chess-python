@@ -20,31 +20,32 @@ class ChessBoardTest(unittest.TestCase):
         assert self.chess_board.MAX_BOARD_WIDTH == 8
 
     def test_lower_left_corner_is_valid_position(self):
-        is_valid = self.chess_board.is_legal_board_position(self.coords(x=0, y=0))
-        assert is_valid
+        coords = self.coords(x=0, y=0)
+        assert self.chess_board.legal_board_position(coords)
 
     def test_upper_right_corner_is_valid_position(self):
-        is_valid = self.chess_board.is_legal_board_position(self.coords(x=7, y=7))
-        assert is_valid
+        coords = self.coords(x=7, y=7)
+        assert self.chess_board.legal_board_position(coords)
 
     def test_position_out_of_bounds_east_is_invalid(self):
-        is_valid = self.chess_board.is_legal_board_position(self.coords(x=11, y=5))
-        assert not is_valid
+        coords = self.coords(x=11, y=5)
+        assert not self.chess_board.legal_board_position(coords)
 
     def test_position_out_of_bounds_north_is_invalid(self):
-        is_valid = self.chess_board.is_legal_board_position(self.coords(x=5, y=9))
-        assert not is_valid
+        coords = self.coords(x=5, y=9)
+        assert not self.chess_board.legal_board_position(coords)
 
     def test_that_avoids_duplicate_positioning(self):
         first_pawn = Pawn(color='black')
         second_pawn = Pawn(color='black')
-        self.chess_board.add(first_pawn, self.coords(x=6, y=3))
-        self.chess_board.add(second_pawn, self.coords(x=6, y=3))
+        coords = self.coords(x=6, y=3)
+        self.chess_board.add(first_pawn, coords)
+        self.chess_board.add(second_pawn, coords)
 
         assert first_pawn.x_coordinate == 6
         assert first_pawn.y_coordinate == 3
-        assert second_pawn.x_coordinate == -1
-        assert second_pawn.y_coordinate == -1
+        assert not second_pawn.x_coordinate
+        assert not second_pawn.y_coordinate
 
     def test_limits_the_number_of_pawns(self):
         for count in range(10):
@@ -61,8 +62,8 @@ class ChessBoardTest(unittest.TestCase):
                 assert pawn.x_coordinate == count
                 assert pawn.y_coordinate == count % self.chess_board.MAX_BOARD_WIDTH
             else:
-                assert pawn.x_coordinate == -1
-                assert pawn.y_coordinate == -1
+                assert not pawn.x_coordinate
+                assert not pawn.y_coordinate
 
     def test_piece_moved_on_board(self):
         pawn = Pawn(color='black')
