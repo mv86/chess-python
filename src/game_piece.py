@@ -23,8 +23,10 @@ class GamePiece(ABC):
 
     @abstractmethod
     def valid_move(self):
-        pass
+        """Confirm if move supported by this piece. Return bool."""
+        raise NotImplementedError() 
 
     @abstractmethod
     def valid_capture(self):
-        pass
+        """Confirm if capture supported by this piece. Return bool."""
+        raise NotImplementedError() 
