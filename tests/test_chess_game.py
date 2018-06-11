@@ -92,13 +92,16 @@ class ChessGameTest(unittest.TestCase):
 
     def test_captured_piece_removed_from_board(self):
         white_pawn1 = Pawn(color='white')       
-        white_pawn2 = Pawn(color='white')       
+        white_pawn2 = Pawn(color='white')
+        color = white_pawn2.color
+        type_ = white_pawn2.type       
         self.chess_game.add(self.pawn, self.coords(x=6, y=6))
         self.chess_game.add(white_pawn1, self.coords(x=5, y=5))
         self.chess_game.add(white_pawn2, self.coords(x=4, y=4))
 
         assert white_pawn1.x_coord == 5
         assert white_pawn1.y_coord == 5       
+        assert self.chess_game.pieces[color][type_] == 2
         # Attack white_pawn1
         self.chess_game.move(self.coords(x=6, y=6), self.coords(x=5, y=5))
         # Previous position empty
@@ -110,6 +113,7 @@ class ChessGameTest(unittest.TestCase):
         # Captured piece no longer on board
         assert not white_pawn1.x_coord
         assert not white_pawn1.x_coord
+        assert self.chess_game.pieces[color][type_] == 1
 
         assert white_pawn2.x_coord == 4
         assert white_pawn2.y_coord == 4       
@@ -124,6 +128,7 @@ class ChessGameTest(unittest.TestCase):
         # Captured piece no longer on board
         assert not white_pawn2.x_coord
         assert not white_pawn2.x_coord
+        assert self.chess_game.pieces[color][type_] == 0
 
     def test_invalid_from_coords_raises_exception(self):
         from_coords = self.coords(x=1, y=50)

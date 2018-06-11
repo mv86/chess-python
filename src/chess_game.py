@@ -97,6 +97,7 @@ class ChessGame():
             captured_piece.x_coord = None
             captured_piece.y_coord = None
             board_postion = None
+            self.pieces[captured_piece.color][captured_piece.type] -= 1
 
         # Place piece at new coordinates
         self._place(piece, coords)
