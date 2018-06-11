@@ -74,14 +74,18 @@ class ChessGameTest(unittest.TestCase):
         self.chess_game.add(self.pawn, self.coords(x=6, y=6))
         self.chess_game.move(self.coords(x=6, y=6), self.coords(x=6, y=5))
 
+        # Previous positon empty
         assert self.chess_game.board[6][6] is None
+        # New postion occupied and Pawn coordinates updated
         assert self.chess_game.board[6][5] == self.pawn
         assert self.pawn.x_coord == 6
         assert self.pawn.y_coord == 5
 
         self.chess_game.move(self.coords(x=6, y=5), self.coords(x=6, y=4))
 
+        # Previous position empty
         assert self.chess_game.board[6][5] is None
+        # New postion occupied and Pawn coordinates updated
         assert self.chess_game.board[6][4] == self.pawn
         assert self.pawn.x_coord == 6
         assert self.pawn.y_coord == 4
@@ -97,10 +101,13 @@ class ChessGameTest(unittest.TestCase):
         assert white_pawn1.y_coord == 5       
         # Attack white_pawn1
         self.chess_game.move(self.coords(x=6, y=6), self.coords(x=5, y=5))
+        # Previous position empty
         assert self.chess_game.board[6][6] is None
+        # Captured piece removed and replaced by attacking piece
         assert self.chess_game.board[5][5] == self.pawn
         assert self.pawn.x_coord == 5
         assert self.pawn.y_coord == 5
+        # Captured piece no longer on board
         assert not white_pawn1.x_coord
         assert not white_pawn1.x_coord
 
@@ -108,10 +115,13 @@ class ChessGameTest(unittest.TestCase):
         assert white_pawn2.y_coord == 4       
         # Attack white_pawn2
         self.chess_game.move(self.coords(x=5, y=5), self.coords(x=4, y=4))
+        # Previous position empty
         assert self.chess_game.board[5][5] is None
+        # Captured piece removed and replaced by attacking piece
         assert self.chess_game.board[4][4] == self.pawn
         assert self.pawn.x_coord == 4
         assert self.pawn.y_coord == 4
+        # Captured piece no longer on board
         assert not white_pawn2.x_coord
         assert not white_pawn2.x_coord
 

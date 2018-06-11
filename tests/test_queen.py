@@ -16,16 +16,21 @@ class TestQueen(unittest.TestCase):
         self.chess_game.add(self.queen, self.start_coords)
 
     def test_horizontal_move_valid(self):
-        assert self.queen.valid_move(self.coords(x=1, y=4))
+        valid = self.queen.valid_move(self.coords(x=1, y=4))
+        assert valid
 
     def test_vertical_capture_valid(self):
-        assert self.queen.valid_capture(self.coords(x=7, y=6))
+        valid = self.queen.valid_capture(self.coords(x=7, y=6))
+        assert valid
 
     def test_diagonal_move_valid(self):
-        assert self.queen.valid_move(self.coords(x=5, y=2))
+        valid = self.queen.valid_move(self.coords(x=5, y=2))
+        assert valid
 
     def test_nonlinear_move_not_valid(self):
-        assert not self.queen.valid_move(self.coords(x=1, y=5))
+        valid = self.queen.valid_move(self.coords(x=1, y=5))
+        assert not valid
 
     def test_nonlinear_capture_not_valid(self):
-        assert self.queen.valid_move(self.coords(x=5, y=2))
+        valid = self.queen.valid_move(self.coords(x=6, y=2))
+        assert not valid
