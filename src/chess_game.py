@@ -1,6 +1,7 @@
 """Module for ChessGame class."""
 from collections import defaultdict
 
+from src.game_helper import move_direction
 from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
 
 
@@ -118,7 +119,7 @@ class ChessGame():
         if piece.type == 'Knight': # Knight can jump over pieces
             return False
 
-        direction = self._move_direction(piece, coords)
+        direction = move_direction(piece, coords)
 
         if direction == 'vertical':
             for num in range(piece.y_coord + 1, coords.y):
@@ -133,17 +134,6 @@ class ChessGame():
                 if self.board[num][num] is not None:
                     return True          
         return False
-
-    @staticmethod
-    def _move_direction(piece, coords):
-        """Helper method. Return str direction."""
-        if piece.x_coord != coords.x and piece.y_coord != coords.y:
-            direction = 'diagonal'
-        elif piece.x_coord != coords.x:
-            direction = 'horizontal'
-        else:  # piece.y_coord != coords.y
-            direction = 'vertical'
-        return direction
 
     def _valid_piece_move(self, piece, to_coords):
         """Check if to_coords are valid move or capture for piece. Return bool."""
