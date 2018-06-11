@@ -3,8 +3,6 @@ from collections import defaultdict
 
 from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
 
-# from src.piece_color import PieceColor
-
 
 class ChessBoard():
     """Main game logic for chess game.

@@ -4,7 +4,6 @@ import unittest
 from src.chess_board import ChessBoard
 from src.pawn import Pawn
 from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
-# from src.piece_color import PieceColor
 
 
 class ChessBoardTest(unittest.TestCase):

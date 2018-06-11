@@ -2,10 +2,8 @@ from collections import namedtuple
 import unittest
 
 from src.chess_board import ChessBoard
-# from src.movement_type import MovementType
-from src.pawn import Pawn
 from src.game_errors import InvalidMoveError
-# from src.piece_color import PieceColor
+from src.pawn import Pawn
 
 
 class TestPawn(unittest.TestCase):
