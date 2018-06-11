@@ -42,3 +42,20 @@
 **Created three game exceptions: NotOnBoardError, PieceNotFoundError, InvalidMoveError**
 
 *Reason:* Express the infomation I want to return from the GameBoard interface if any exceptions raised.
+
+
+**Created game_pieces package to hold all the game_piece modules.**
+
+*Reason:* Will improve project organisation when all pieces have been implemented.
+
+
+### 11/06/2018
+
+**Removed MovementType enum and module.**
+
+*Reason:* Have used following logic: If to_coordinates is occupied then move is capture, else move is move. MovementType not required.
+
+
+**Renamed ChessBoard class to ChessGame.**
+
+*Reason:* Better represents what it is. Has more responsibilities than just a board.

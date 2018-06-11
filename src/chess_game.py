@@ -4,7 +4,7 @@ from collections import defaultdict
 from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
 
 
-class ChessBoard():
+class ChessGame():
     """Main game logic for chess game.
 
        Attributes:
