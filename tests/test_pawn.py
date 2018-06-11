@@ -1,9 +1,10 @@
+"""Test module for Pawn game piece."""
 from collections import namedtuple
 import unittest
 
 from src.chess_board import ChessBoard
 from src.game_errors import InvalidMoveError
-from src.pawn import Pawn
+from src.game_pieces.pawn import Pawn
 
 
 class TestPawn(unittest.TestCase):

@@ -1,3 +1,4 @@
+"""Test module for game_errors."""
 from collections import namedtuple
 import unittest
 

@@ -1,8 +1,9 @@
+"""Test module form ChessBoard class."""
 from collections import namedtuple
 import unittest
 
 from src.chess_board import ChessBoard
-from src.pawn import Pawn
+from src.game_pieces.pawn import Pawn
 from src.game_errors import InvalidMoveError, NotOnBoardError, PieceNotFoundError
 
 

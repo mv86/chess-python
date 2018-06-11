@@ -1,7 +1,9 @@
-from src.game_piece import GamePiece
+"""Module for Pawn class."""
+from src.game_pieces.game_piece import GamePiece
 
 
 class Pawn(GamePiece):
+    """Pawn chess game piece. Inherits from GamePiece."""
     def __init__(self, *, color):
         super().__init__()
         self.color = color

@@ -1,7 +1,8 @@
+"""Test module for GamePieces ABC."""
 import unittest
 
-from src.game_piece import GamePiece
-from src.pawn import Pawn
+from src.game_pieces.game_piece import GamePiece
+from src.game_pieces.pawn import Pawn
 
 
 class TestGamePiece(unittest.TestCase):
