@@ -2,13 +2,13 @@
 
    TODO Document functions.
 """
-def move_direction(piece, coords):
+def move_direction(piece, to_coords):
     """Calculate direction from piece to coordinates. Return str."""
-    if _diagonal_movement(piece, coords):
+    if _diagonal_movement(piece, to_coords):
         direction = 'diagonal'
-    elif piece.x_coord != coords.x and piece.y_coord == coords.y:
+    elif piece.x_coord != to_coords.x and piece.y_coord == to_coords.y:
         direction = 'horizontal'
-    elif piece.y_coord != coords.y and piece.x_coord == coords.x:
+    elif piece.y_coord != to_coords.y and piece.x_coord == to_coords.x:
         direction = 'vertical'
     else:
         direction = 'non_linear'

@@ -6,7 +6,6 @@ from src.chess_game import ChessGame
 from src.game_pieces.queen import Queen
 
 class TestQueen(unittest.TestCase):
-    """docstring for TestQueen"""
     def setUp(self):
         super().setUp()
 
