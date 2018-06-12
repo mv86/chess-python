@@ -40,6 +40,14 @@ class ChessGame():
             'black': defaultdict(int)
         }
 
+    def new_game(self):
+        # TODO Add functionality to create new board with full set of pieces
+        raise NotImplementedError()
+
+    def restore_game(self):
+        # TODO Add functionality to restore game at given point in time
+        raise NotImplementedError()
+
     def add(self, piece, coords):
         """Add piece to board at given coordinates. Update piece to have same coordinates.
 
