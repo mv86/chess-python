@@ -16,6 +16,6 @@ The project currently has a class ChessGame that acts as the public interface fo
 
 * ChessGame is getting too unwieldy and could be refactored into two classes. Something like ChessGame for the public methods and higher level functionality and GameState for keeping track of pieces' board positions and the lower level move checking.
 * The chess board could be refactored to a dict of lists, better representing a physical board.
-'''python
+```python
 	board = {char: [None] * 8 for _ in range(8) for char in 'ABCDEFGH'}
-'''
+```
