@@ -52,7 +52,7 @@ class ChessGame():
             self._place(piece, coords)
 
     def move(self, from_coords, to_coords):
-        """Move piece from coordinates, to coordianates.
+        """Move piece from coordinates, to coordianates. Remove captured piece, if any.
 
            Args:
                 from_coords: Namedtuple with coordinates x & y. E.g. Coords(x=0, y=1)
@@ -120,25 +120,34 @@ class ChessGame():
         if piece.type == 'Knight': # Knight can jump over pieces
             return False
 
+        # Sort coords so logical direction of move not important
+        # (x=5, y=6) -> (x=1, y=2) same as (x=1, y=2) -> (x=5, y=6)
+        min_x_coord, max_x_coord = sorted([piece.x_coord, coords.x])
+        min_y_coord, max_y_coord = sorted([piece.y_coord, coords.y])
         direction = move_direction(piece, coords)
 
         if direction == 'vertical':
-            for num in range(piece.y_coord + 1, coords.y):
-                if self.board[piece.x_coord][num] is not None:
+            for next_y_coord in range(min_y_coord + 1, max_y_coord):
+                if self.board[piece.x_coord][next_y_coord] is not None:
                     return True
         elif direction == 'horizontal':
-            for num in range(piece.x_coord + 1, coords.x):
-                if self.board[num][piece.y_coord] is not None:
+            for next_x_coord in range(min_x_coord + 1, max_x_coord):
+                if self.board[next_x_coord][piece.y_coord] is not None:
                     return True
         elif direction == 'diagonal':
-            for num in range(piece.x_coord + 1, coords.x):
-                if self.board[num][num] is not None:
-                    return True          
+            next_y_coord = min_y_coord + 1
+            for next_x_coord in range(min_x_coord + 1, max_x_coord):
+                if self.board[next_x_coord][next_y_coord] is not None:
+                    return True
+                next_y_coord += 1 
+
+        # No pieces blocking
         return False
 
     def _valid_piece_move(self, piece, to_coords):
         """Check if to_coords are valid move or capture for piece. Return bool."""
-        if self.board[to_coords.x][to_coords.y] is None:  # Empty square == move
+        if self.board[to_coords.x][to_coords.y] is None:  
+            # Empty square == move
             return piece.valid_move(to_coords)
         # Occupied square == capture
         return piece.valid_capture(to_coords)

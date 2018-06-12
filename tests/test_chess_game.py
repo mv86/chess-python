@@ -158,6 +158,13 @@ class ChessGameTest(unittest.TestCase):
         to_coords = self.coords(2, 4)
         self.assertRaises(InvalidMoveError, self.move, from_coords, to_coords)
 
+    def test_piece_blocking_vertical_move_down_raises_exception(self):
+        self.chess_game.add(self.piece, self.coords(2, 6))
+        self.chess_game.add(self.blocking_piece, self.coords(2, 4))
+        from_coords = self.coords(2, 6)
+        to_coords = self.coords(2, 2)
+        self.assertRaises(InvalidMoveError, self.move, from_coords, to_coords)
+
     def test_piece_blocking_horizontal_move_raises_exception(self):
         self.chess_game.add(self.piece, self.coords(2, 2))
         self.chess_game.add(self.blocking_piece, self.coords(4, 2))
@@ -166,10 +173,17 @@ class ChessGameTest(unittest.TestCase):
         self.assertRaises(InvalidMoveError, self.move, from_coords, to_coords)
     
     def test_piece_blocking_diagonal_move_raises_exception(self):
-        self.chess_game.add(self.piece, self.coords(2, 2))
-        self.chess_game.add(self.blocking_piece, self.coords(4, 4))
-        from_coords = self.coords(2, 2)
-        to_coords = self.coords(6, 6)
+        self.chess_game.add(self.piece, self.coords(1, 2))
+        self.chess_game.add(self.blocking_piece, self.coords(3, 4))
+        from_coords = self.coords(1, 2)
+        to_coords = self.coords(4, 5)
+        self.assertRaises(InvalidMoveError, self.move, from_coords, to_coords)
+
+    def test_piece_blocking_diagonal_down_move_raises_exception(self):
+        self.chess_game.add(self.piece, self.coords(6, 7))
+        self.chess_game.add(self.blocking_piece, self.coords(3, 4))
+        from_coords = self.coords(6, 7)
+        to_coords = self.coords(1, 2)
         self.assertRaises(InvalidMoveError, self.move, from_coords, to_coords)
   
     def test_invalid_move_for_piece_raises_exception(self):

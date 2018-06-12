@@ -20,7 +20,7 @@ def move_direction(piece, to_coords):
 
 
 def _diagonal_movement(piece, coords):
-    """Helper function fro move_direction. Return bool."""
+    """Helper function for move_direction. Return bool."""
     min_x_coord, max_x_coord = sorted([piece.x_coord, coords.x])
     min_y_coord, max_y_coord = sorted([piece.y_coord, coords.y])
     # Only diagonal if distance equal lengths

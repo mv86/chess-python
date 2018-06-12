@@ -59,3 +59,8 @@
 **Renamed ChessBoard class to ChessGame.**
 
 *Reason:* Better represents what it is. Has more responsibilities than just a board.
+
+
+**Created game_helper module for any helper functions used by multiple classes.**
+
+*Reason:* 
