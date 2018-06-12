@@ -39,6 +39,11 @@
 *Reason:* Didn't add any functionality and helps keep the code cleaner.
 
 
+**Changed GamePiece abstract methods to valid_move & valid_capture.**
+
+*Reason:* Felt they shouldn't be responsible for moving themselves and should just have internal logic about what move/captures are possible. This leaves other game logic such as piece being in the way up to the ChessGame class.
+
+
 **Created three game exceptions: NotOnBoardError, PieceNotFoundError, InvalidMoveError**
 
 *Reason:* Express the infomation I want to return from the GameBoard interface if any exceptions raised.
@@ -63,4 +68,4 @@
 
 **Created game_helper module for any helper functions used by multiple classes.**
 
-*Reason:* 
+*Reason:* As the project grows there will be small bits of functionality used by various classes. This helps code duplication. TODO If some functionality is shared by multiple game pieces then create a serperate game_piece_helper module in the game_pieces package.
