@@ -41,7 +41,7 @@
 
 **Changed GamePiece abstract methods to valid_move & valid_capture.**
 
-*Reason:* Felt they shouldn't be responsible for moving themselves and should just have internal logic about what move/captures are possible. This leaves other game logic such as piece being in the way up to the ChessGame class.
+*Reason:* Felt they shouldn't be responsible for moving themselves and should just have internal logic about what move/captures are possible. This leaves other game logic such as a piece being in the way up to the ChessGame class.
 
 
 **Created three game exceptions: NotOnBoardError, PieceNotFoundError, InvalidMoveError**
@@ -68,4 +68,4 @@
 
 **Created game_helper module for any helper functions used by multiple classes.**
 
-*Reason:* As the project grows there will be small bits of functionality used by various classes. This helps code duplication. TODO If some functionality is shared by multiple game pieces then create a serperate game_piece_helper module in the game_pieces package.
+*Reason:* As the project grows there will be small bits of functionality used by various classes. This helps reduce code duplication. TODO If some functionality is shared by multiple game pieces then create a seperate game_piece_helper module in the game_pieces package.
