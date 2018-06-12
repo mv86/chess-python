@@ -15,7 +15,11 @@ The project currently has a class ChessGame that acts as the public interface fo
 #### Short-term
 
 * ChessGame is getting too unwieldy and could be refactored into two classes. Something like ChessGame for the public methods and higher level functionality and GameState for keeping track of pieces' board positions and the lower level move checking.
-* The chess board could be refactored to a dict of lists, better representing a physical board.
+* The chess board could be refactored to a dict of lists, better representing a physical board and what the user sees in the final Flask app for example. It would also be clearer in method calls (but the y_coord would need to be -1 for the list index. 
 ```python
-	board = {char: [None] * 8 for _ in range(8) for char in 'ABCDEFGH'}
+# Example board
+board = {char: [None] * 8 for _ in range(8) for char in 'ABCDEFGH'}
+
+# Example usage
+game.move(from_position=('A', 1), to_position=('B', 3))
 ```
